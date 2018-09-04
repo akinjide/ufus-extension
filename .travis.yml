@@ -8,6 +8,7 @@ deploy:
   script: npm run deploy
   on:
     branch: master
+    tags: true
 
 env:
   EXTENSION_ID=kcehmhmmioeddhjddnaenanalobejajn

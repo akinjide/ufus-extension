@@ -5,6 +5,7 @@ var services = require('./src')({
 document.addEventListener('DOMContentLoaded', function() {
   var showDesktopNotifications = document.getElementById('show-desktop-notifications')
   var readTabs = document.getElementById('read-active-tab')
+  // var browserContext = document.getElementById('enable-context-menus')
   var notificationsError = document.getElementById('notifications-error')
   var optionsError = document.getElementById('option-error')
 
@@ -44,10 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
           notificationsError.style.display = 'block';
         })
       } else {
-        option.write().catch(function(error) {
-          optionsError.style.display = 'block'
-          ping('error', error)
-        })
+        services.permissions.remove('notifications')
+          .then(option.write())
+          .catch(function(error) {
+            optionsError.style.display = 'block'
+            ping('error', error)
+          })
       }
     }
   })
@@ -104,6 +107,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
 
+  // var EnableContextMenusOption = new services.Option(window, services.storeSync, {
+  //   id: 'enable-context-menus',
+  //   type: 'checked',
+  //   storeKey: 'browserContextMenus',
+  //   onChange: function(option) {
+  //     if (browserContext.checked) {
+  //       services.permissions.request('contextMenus').then(function(granted) {
+  //         if (granted) {
+  //           ping('info', granted)
+  //         }
+
+  //         return option.write(granted)
+  //       }).catch(function(error) {
+  //         ping('error', error)
+  //       })
+  //     } else {
+  //       services.permissions.remove('contextMenus')
+  //         .then(option.write())
+  //         .catch(function(error) {
+  //           optionsError.style.display = 'block'
+  //           ping('error', error)
+  //         })
+  //     }
+  //   }
+  // })
+
   function ping(type, message) {
     window.chrome.runtime.sendMessage({
       mode: 'ping',
@@ -118,5 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
     PlayNotificationsOption.read()
     EnableNerdsStackOption.read()
     ReadActiveTabOption.read()
+    // EnableContextMenusOption.read()
   }
 })

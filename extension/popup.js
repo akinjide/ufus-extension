@@ -177,6 +177,11 @@ function ping(type, message, callback) {
     type: type,
     message: message
   }, function(response) {
+    if (window.chrome.runtime.lastError) {
+      callback = callback || function() {}
+      callback({ error: window.chrome.runtime.lastError })
+    }
+
     if (response) {
       callback(response)
     }

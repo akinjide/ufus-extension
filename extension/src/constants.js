@@ -47,7 +47,8 @@ var defaults = {
   'playNotifications': false,
   'showNotifications': false,
   'nerdsStack': false,
-  'readActiveTab': false
+  'readActiveTab': false,
+  'browserContextMenus': false
 }
 
 exports.defaultTitle = defaults.appName

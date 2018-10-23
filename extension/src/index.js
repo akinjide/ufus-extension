@@ -16,6 +16,7 @@ var Exception = require('./Exception')
 var Notifications = require('./Notifications')
 var Clipboard = require('./Clipboard')
 var Lib = require('./Lib')
+var ContextMenus = require('./ContextMenus')
 
 
 /**
@@ -41,4 +42,5 @@ module.exports = function Services(options) {
   this.notifications = new Notifications(this.ctx, this.store)
   this.clipboard = new Clipboard(this.ctx)
   this.lib = new Lib()
+  this.contextMenus = new ContextMenus(this.ctx)
 }

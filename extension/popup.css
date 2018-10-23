@@ -31,7 +31,10 @@
   margin-top: 4px;
 }
 
-#recents { color: #515050 }
+#recents {
+  color: #515050;
+  position: relative;
+}
 
 #recents h2 {
   font-size: 26px;
@@ -67,12 +70,20 @@
 }
 
 #recents #clear {
-  border: none;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
   background: transparent;
-  text-decoration: underline;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   outline: none;
+  float: right;
+  right: 0;
+  position: absolute;
+  top: 12px;
+  padding: 2px 12px;
+  color: #515050;
+  transition: all 0.5s ease-out;
+  font-weight: 500;
 }
 
 #normal-stack { margin-bottom: 2.0em; }

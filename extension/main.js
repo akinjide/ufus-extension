@@ -91,6 +91,25 @@ function pong(request, _, respond) {
   }
 }
 
+// function registerContextMenus() {
+//   var contexts = services.contextMenus.contextTypes;
+
+//   for (var i = 0; i < contexts.length; i++) {
+//     var context = contexts[i]
+//     var title = 'Shorten \'' + context + '\' URL'
+
+//     if (context == contexts[1]) {
+//       title = 'Shorten \'%s\' URL'
+//     }
+
+//     services.contextMenus.create({
+//       'id': services.constants.defaults.storePrefix + '000' + String(i),
+//       'title': title,
+//       'contexts': [context]
+//     })
+//   }
+// }
+
 function main() {
   if (navigator.onLine) {
     services.badge.default('network')
@@ -104,6 +123,33 @@ function installerHandler(details) {
     window.chrome.runtime.openOptionsPage()
   }
 }
+
+// function contextMenusHandler(info, tab) {
+//   var prefix = services.constants.defaults.storePrefix
+//   var message = {}
+
+//   switch (info.menuItemId) {
+//     case prefix + '0000':
+//       message.long_url = info.pageUrl
+//       break
+
+//     case prefix + '0001':
+//       message.long_url = info.selectionText
+//       break
+
+//     case prefix + '0002':
+//       message.long_url = info.linkUrl
+//       break
+
+//     case prefix + '0003':
+//     case prefix + '0004':
+//     case prefix + '0005':
+//       message.long_url = info.srcUrl
+//       break
+//   }
+
+//   pong({ mode: 'ping', type: 'process', message: message }, null, null)
+// }
 
 window.addEventListener('online', detectConnectionHandler)
 window.addEventListener('offline', detectConnectionHandler)
@@ -133,6 +179,44 @@ services.permissions.query('notifications').then(function(granted) {
 }).catch(function(error) {
   pong({ mode: 'ping', type: 'error', message: error })
 })
+
+// services.permissions.query('notifications')
+//   .then(function(granted) {
+//     if (granted) {
+//       window.chrome.notifications.onClicked.addListener(function(id) {
+//         services.clipboard.copy(
+//           services.store.get(id)
+//         )
+
+//         services.notifications.close(id).then(function() {
+//           services.notifications.remove(id)
+//         }).catch(function(error) {
+//           pong({ mode: 'ping', type: 'error', message: error })
+//         })
+//       })
+
+//       window.chrome.notifications.onClosed.addListener(function(id) {
+//         services.notifications.close(id).then(function() {
+//           services.notifications.remove(id)
+//         }).catch(function(error) {
+//           pong({ mode: 'ping', type: 'error', message: error })
+//         })
+//       })
+//     }
+//   })
+//   .then(function() {
+//     return services.permissions.query('contextMenus')
+//   })
+//   .then(function(granted) {
+//     console.log(granted)
+//     if (granted) {
+//       registerContextMenus()
+//       window.chrome.contextMenus.onClicked.addListener(contextMenusHandler)
+//     }
+//   })
+//   .catch(function(error) {
+//     pong({ mode: 'ping', type: 'error', message: error })
+//   })
 
 window.chrome.runtime.onInstalled.addListener(installerHandler)
 window.chrome.runtime.onMessage.addListener(pong)

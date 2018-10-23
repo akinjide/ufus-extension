@@ -47,7 +47,7 @@ Badge.prototype.default = function(message) {
 
 Badge.prototype.count = function(recents) {
   if (recents == 0) {
-    return '';
+    return 'Q';
   }
 
   if (recents > 9999) {

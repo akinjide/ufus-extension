@@ -9,7 +9,7 @@ Ufus in your browser! Start shortening immediately.
 
 - Chrome
 - Firefox
-- Opera
+- `{ Opera: https://addons.opera.com/en/extensions/details/install-chrome-extensions/ }`
 
 
 ## Permissions

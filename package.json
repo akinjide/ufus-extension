@@ -10,7 +10,7 @@
     "test": "ava"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
+    "ava": "^2.2.0",
     "chrome-stub": "^1.6.0",
     "chrome-webstore-upload-cli": "^1.1.1",
     "istanbul": "^0.4.5",
